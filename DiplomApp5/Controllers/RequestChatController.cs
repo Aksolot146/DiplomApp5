@@ -12,10 +12,11 @@ namespace DiplomApp5.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RequestStatsController : Controller
+    public class RequestChatController : Controller
     {
         private readonly ApplicationContext _context;
-        public RequestStatsController(ApplicationContext context)
+
+        public RequestChatController(ApplicationContext context)
         {
             _context = context;
         }
@@ -25,7 +26,7 @@ namespace DiplomApp5.Controllers
         {
             try
             {
-                var listCustomers = await _context.RequestStats.ToListAsync();
+                var listCustomers = await _context.RequestChat.ToListAsync();
                 return Ok(listCustomers);
             }
             catch (Exception ex)
@@ -35,32 +36,31 @@ namespace DiplomApp5.Controllers
         }
 
         [HttpGet("{id}")]
-        public RequestStat Get(int id)
+        public RequestChat Get(int id)
         {
-            return _context.RequestStats.FirstOrDefault(x => x.Id == id);
+            return _context.RequestChat.FirstOrDefault(x => x.Id == id);
         }
 
         [HttpPost]
-        public int Add(RequestStat requestStat)
+        public int Add(RequestChat requestChat)
         {
-            //currentUser.Id = 1;
-            _context.RequestStats.Add(requestStat);
+            _context.RequestChat.Add(requestChat);
             _context.SaveChanges();
-            return requestStat.Id;
+            return requestChat.Id;
         }
 
         [HttpDelete("{id}")]
         public void Remove(int id)
         {
-            RequestStat requestStat = Get(id);
-            _context.RequestStats.Remove(requestStat);
+            RequestChat requestChat = Get(id);
+            _context.RequestChat.Remove(requestChat);
             _context.SaveChanges();
         }
 
-        [HttpDelete]
-        public void Remove()
+        [HttpPut]
+        public void Update(RequestChat requestChat)
         {
-            _context.Database.ExecuteSqlRaw("delete from requeststats");
+            _context.RequestChat.Update(requestChat);
             _context.SaveChanges();
         }
 

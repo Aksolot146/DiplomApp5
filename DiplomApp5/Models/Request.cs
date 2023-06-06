@@ -27,5 +27,8 @@ namespace DiplomApp5.Models
 
         [ForeignKey("StatusId")]
         public virtual RequestStatus RequestStatus { get; set; }
+
+        [JsonIgnore]
+        public virtual ICollection<RequestChat> RequestChat { get; set; } = new HashSet<RequestChat>();
     }
 }

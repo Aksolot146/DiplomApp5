@@ -27,5 +27,8 @@ namespace DiplomApp5.Models
 
         [JsonIgnore]
         public virtual ICollection<Request> Request { get; set; } = new HashSet<Request>();
+
+        [JsonIgnore]
+        public virtual ICollection<RequestChat> RequestChat { get; set; } = new HashSet<RequestChat>();
     }
 }
